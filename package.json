@@ -1,0 +1,22 @@
+{
+  "name": "automation-portfolio",
+  "version": "1.0.0",
+  "description": "Playwright TypeScript automation portfolio for an e-commerce demo workflow.",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report",
+    "test:smoke": "playwright test tests/smoke.spec.ts",
+    "test:login": "playwright test tests/login.spec.ts",
+    "test:products": "playwright test tests/products.spec.ts",
+    "test:cart": "playwright test tests/cart.spec.ts",
+    "test:checkout": "playwright test tests/checkout.spec.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0"
+  }
+}
