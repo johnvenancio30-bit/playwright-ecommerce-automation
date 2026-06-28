@@ -1,4 +1,4 @@
-# Automation Portfolio
+# Playwright E-Commerce Automation
 
 Playwright + TypeScript automation framework for a demo e-commerce workflow on SauceDemo.
 
@@ -17,6 +17,12 @@ This project shows how to automate real user flows, organize browser tests with 
 - Cart badge count
 - Checkout form validation
 - Complete end-to-end order flow
+
+## Visual Workflow
+
+![Automation workflow](docs/automation-workflow.png)
+
+For a short non-technical explanation, see [Automation System Note](AUTOMATION_SYSTEM_NOTE.md).
 
 ## Tech Stack
 
@@ -44,7 +50,7 @@ This project shows how to automate real user flows, organize browser tests with 
 ## Project Structure
 
 ```text
-automation-portfolio/
+playwright-ecommerce-automation/
   pages/
     CartPage.ts
     CheckoutPage.ts

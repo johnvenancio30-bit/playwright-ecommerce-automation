@@ -1,5 +1,5 @@
 {
-  "name": "automation-portfolio",
+  "name": "playwright-ecommerce-automation",
   "version": "1.0.0",
   "description": "Playwright TypeScript automation portfolio for an e-commerce demo workflow.",
   "private": true,
