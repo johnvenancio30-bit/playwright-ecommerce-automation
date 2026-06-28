@@ -1,11 +1,11 @@
 import { test } from '@playwright/test';
-import { CartPage } from '../pages/CartPage';
-import { CheckoutPage } from '../pages/CheckoutPage';
-import { LoginPage } from '../pages/LoginPage';
-import { ProductsPage } from '../pages/ProductsPage';
-import checkoutData from '../test-data/checkout.json';
-import products from '../test-data/products.json';
-import users from '../test-data/users.json';
+import { CartPage } from '../../src/pages/CartPage';
+import { CheckoutPage } from '../../src/pages/CheckoutPage';
+import { LoginPage } from '../../src/pages/LoginPage';
+import { ProductsPage } from '../../src/pages/ProductsPage';
+import checkoutData from '../fixtures/checkout.json';
+import products from '../fixtures/products.json';
+import users from '../fixtures/users.json';
 
 test.describe('Checkout', () => {
   test.beforeEach(async ({ page }) => {

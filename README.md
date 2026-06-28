@@ -22,7 +22,7 @@ This project shows how to automate real user flows, organize browser tests with 
 
 ![Automation workflow](docs/automation-workflow.png)
 
-For a short non-technical explanation, see [Automation System Note](AUTOMATION_SYSTEM_NOTE.md).
+For a short non-technical explanation, see [Automation System Note](docs/automation-system-note.md).
 
 ## Tech Stack
 
@@ -51,24 +51,29 @@ For a short non-technical explanation, see [Automation System Note](AUTOMATION_S
 
 ```text
 playwright-ecommerce-automation/
-  pages/
-    CartPage.ts
-    CheckoutPage.ts
-    LoginPage.ts
-    ProductDetailsPage.ts
-    ProductsPage.ts
+  src/
+    pages/
+      CartPage.ts
+      CheckoutPage.ts
+      LoginPage.ts
+      ProductDetailsPage.ts
+      ProductsPage.ts
 
   tests/
-    cart.spec.ts
-    checkout.spec.ts
-    login.spec.ts
-    products.spec.ts
-    smoke.spec.ts
+    e2e/
+      cart.spec.ts
+      checkout.spec.ts
+      login.spec.ts
+      products.spec.ts
+      smoke.spec.ts
+    fixtures/
+      checkout.json
+      products.json
+      users.json
 
-  test-data/
-    checkout.json
-    products.json
-    users.json
+  docs/
+    automation-system-note.md
+    automation-workflow.png
 
   .github/
     workflows/
