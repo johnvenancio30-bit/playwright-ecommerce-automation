@@ -3,9 +3,7 @@ import { CartPage } from '../../src/pages/CartPage';
 import { CheckoutPage } from '../../src/pages/CheckoutPage';
 import { LoginPage } from '../../src/pages/LoginPage';
 import { ProductsPage } from '../../src/pages/ProductsPage';
-import checkoutData from '../fixtures/checkout.json';
-import products from '../fixtures/products.json';
-import users from '../fixtures/users.json';
+import { productCatalog, standardUser, validCustomer } from '../fixtures/runtimeData';
 
 test.describe('Checkout', () => {
   test.beforeEach(async ({ page }) => {
@@ -13,7 +11,7 @@ test.describe('Checkout', () => {
     const productsPage = new ProductsPage(page);
 
     await loginPage.goto();
-    await loginPage.login(users.standard.username, users.standard.password);
+    await loginPage.login(standardUser.username, standardUser.password);
     await productsPage.expectLoaded();
   });
 
@@ -22,17 +20,17 @@ test.describe('Checkout', () => {
     const cartPage = new CartPage(page);
     const checkoutPage = new CheckoutPage(page);
 
-    await productsPage.addProductToCart(products.backpack);
+    await productsPage.addProductToCart(productCatalog.backpack);
     await productsPage.openCart();
     await cartPage.expectLoaded();
     await cartPage.checkout();
 
     await checkoutPage.expectInformationStepLoaded();
-    await checkoutPage.fillCustomerInfo(checkoutData.validCustomer);
+    await checkoutPage.fillCustomerInfo(validCustomer);
     await checkoutPage.continue();
 
     await checkoutPage.expectOverviewLoaded();
-    await checkoutPage.expectProductInOverview(products.backpack);
+    await checkoutPage.expectProductInOverview(productCatalog.backpack);
     await checkoutPage.finishOrder();
 
     await checkoutPage.expectOrderComplete();
@@ -43,7 +41,7 @@ test.describe('Checkout', () => {
     const cartPage = new CartPage(page);
     const checkoutPage = new CheckoutPage(page);
 
-    await productsPage.addProductToCart(products.backpack);
+    await productsPage.addProductToCart(productCatalog.backpack);
     await productsPage.openCart();
     await cartPage.checkout();
 
@@ -58,13 +56,13 @@ test.describe('Checkout', () => {
     const cartPage = new CartPage(page);
     const checkoutPage = new CheckoutPage(page);
 
-    await productsPage.addProductToCart(products.backpack);
+    await productsPage.addProductToCart(productCatalog.backpack);
     await productsPage.openCart();
     await cartPage.checkout();
 
     await checkoutPage.expectInformationStepLoaded();
-    await checkoutPage.firstNameInput.fill(checkoutData.validCustomer.firstName);
-    await checkoutPage.lastNameInput.fill(checkoutData.validCustomer.lastName);
+    await checkoutPage.firstNameInput.fill(validCustomer.firstName);
+    await checkoutPage.lastNameInput.fill(validCustomer.lastName);
     await checkoutPage.continue();
 
     await checkoutPage.expectErrorMessage('Postal Code is required');

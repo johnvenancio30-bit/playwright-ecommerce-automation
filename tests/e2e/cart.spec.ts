@@ -2,8 +2,7 @@ import { expect, test } from '@playwright/test';
 import { CartPage } from '../../src/pages/CartPage';
 import { LoginPage } from '../../src/pages/LoginPage';
 import { ProductsPage } from '../../src/pages/ProductsPage';
-import products from '../fixtures/products.json';
-import users from '../fixtures/users.json';
+import { productCatalog, standardUser } from '../fixtures/runtimeData';
 
 test.describe('Cart', () => {
   test.beforeEach(async ({ page }) => {
@@ -11,7 +10,7 @@ test.describe('Cart', () => {
     const productsPage = new ProductsPage(page);
 
     await loginPage.goto();
-    await loginPage.login(users.standard.username, users.standard.password);
+    await loginPage.login(standardUser.username, standardUser.password);
     await productsPage.expectLoaded();
   });
 
@@ -19,19 +18,19 @@ test.describe('Cart', () => {
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
 
-    await productsPage.addProductToCart(products.backpack);
+    await productsPage.addProductToCart(productCatalog.backpack);
     await productsPage.expectCartBadgeCount(1);
     await productsPage.openCart();
 
     await cartPage.expectLoaded();
-    await cartPage.expectProductInCart(products.backpack);
+    await cartPage.expectProductInCart(productCatalog.backpack);
   });
 
   test('product can be removed from the inventory page', async ({ page }) => {
     const productsPage = new ProductsPage(page);
 
-    await productsPage.addProductToCart(products.backpack);
-    await productsPage.removeProductFromCart(products.backpack);
+    await productsPage.addProductToCart(productCatalog.backpack);
+    await productsPage.removeProductFromCart(productCatalog.backpack);
 
     await productsPage.expectCartBadgeHidden();
   });
@@ -40,19 +39,19 @@ test.describe('Cart', () => {
     const productsPage = new ProductsPage(page);
     const cartPage = new CartPage(page);
 
-    await productsPage.addProductToCart(products.backpack);
+    await productsPage.addProductToCart(productCatalog.backpack);
     await productsPage.openCart();
-    await cartPage.removeProduct(products.backpack);
+    await cartPage.removeProduct(productCatalog.backpack);
 
     await expect(cartPage.cartItems).toHaveCount(0);
-    await cartPage.expectProductNotInCart(products.backpack);
+    await cartPage.expectProductNotInCart(productCatalog.backpack);
   });
 
   test('cart badge updates when multiple products are added', async ({ page }) => {
     const productsPage = new ProductsPage(page);
 
-    await productsPage.addProductToCart(products.backpack);
-    await productsPage.addProductToCart(products.bikeLight);
+    await productsPage.addProductToCart(productCatalog.backpack);
+    await productsPage.addProductToCart(productCatalog.bikeLight);
 
     await productsPage.expectCartBadgeCount(2);
   });

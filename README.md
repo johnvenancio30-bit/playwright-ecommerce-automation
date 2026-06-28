@@ -24,6 +24,8 @@ This project shows how to automate real user flows, organize browser tests with 
 
 For a short non-technical explanation, see [Automation System Note](docs/automation-system-note.md).
 
+For live website monitoring, see [Live E-Commerce Daily Check](docs/live-ecommerce-daily-check.md).
+
 ## Tech Stack
 
 - Playwright
@@ -74,6 +76,7 @@ playwright-ecommerce-automation/
   docs/
     automation-system-note.md
     automation-workflow.png
+    live-ecommerce-daily-check.md
 
   .github/
     workflows/

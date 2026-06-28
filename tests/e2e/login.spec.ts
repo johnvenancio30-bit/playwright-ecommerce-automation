@@ -1,7 +1,11 @@
 import { expect, test } from '@playwright/test';
 import { LoginPage } from '../../src/pages/LoginPage';
 import { ProductsPage } from '../../src/pages/ProductsPage';
-import users from '../fixtures/users.json';
+import {
+  invalidPasswordUser,
+  invalidUsernameUser,
+  standardUser
+} from '../fixtures/runtimeData';
 
 test.describe('Login', () => {
   test.beforeEach(async ({ page }) => {
@@ -12,7 +16,7 @@ test.describe('Login', () => {
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
 
-    await loginPage.login(users.standard.username, users.standard.password);
+    await loginPage.login(standardUser.username, standardUser.password);
 
     await productsPage.expectLoaded();
   });
@@ -20,7 +24,7 @@ test.describe('Login', () => {
   test('invalid username shows an error message', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
-    await loginPage.login(users.invalidUsername.username, users.invalidUsername.password);
+    await loginPage.login(invalidUsernameUser.username, invalidUsernameUser.password);
 
     await loginPage.expectErrorMessage('Username and password do not match');
   });
@@ -28,7 +32,7 @@ test.describe('Login', () => {
   test('invalid password shows an error message', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
-    await loginPage.login(users.invalidPassword.username, users.invalidPassword.password);
+    await loginPage.login(invalidPasswordUser.username, invalidPasswordUser.password);
 
     await loginPage.expectErrorMessage('Username and password do not match');
   });
@@ -44,7 +48,7 @@ test.describe('Login', () => {
   test('empty password shows a required-field error', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
-    await loginPage.usernameInput.fill(users.standard.username);
+    await loginPage.usernameInput.fill(standardUser.username);
     await loginPage.submit();
 
     await loginPage.expectErrorMessage('Password is required');
@@ -54,7 +58,7 @@ test.describe('Login', () => {
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
 
-    await loginPage.login(users.standard.username, users.standard.password);
+    await loginPage.login(standardUser.username, standardUser.password);
     await productsPage.logout();
 
     await expect(page).toHaveURL('/');
